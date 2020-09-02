@@ -1,0 +1,307 @@
+﻿@using resx = MonitoringTraffic.Resources.AR
+@{
+    ViewBag.Title = resx.Streets;
+    ViewBag.Title = "Monitoring Traffic";// Session["StreetsName"];
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @resx.Manage @resx.Streets
+        <small>@resx.Streets</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.Streets</a></li>
+        <li class="active">@resx.Streets</li>
+    </ol>
+
+</section>
+<!-- Main content -->
+<!-- Table  -->
+<section class="content">
+    <div class="row">
+        <div class="box center-block">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <button type="button" onclick="showStreets()" data-toggle="modal" data-target="#modal-Streets" class="btn btn-primary">@resx.Add  @resx.Street</button>
+                </h3>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="box-body col-md-10">
+                <table id="tblStreets" class="table table-bordered table-hover table-striped dataTabler">
+                    <thead style="background-color: #3c8dbc">
+
+                        <tr>
+                            <th>@resx.Name @resx.theStreet</th>
+                            <th>@resx.Name @resx.theCity</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="bodyStreets"></tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</section>
+<!-- End Table  -->
+<!-- Model  -->
+<div class="modal fade" id="modal-Streets">
+    <div class="modal-dialog">
+        <label hidden id="lblStreetsId"></label>
+        <div class="modal-content">
+            <div class="modal-header bg-aqua">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="titleStreets" class="modal-title">@resx.Add @resx.Streets</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>@resx.Name <span id="reName" style="color:red"> * </span></label>
+                        <input type="text" required id="Name" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>@resx.theCity  <span style="color:red">*</span></label>
+                        @Html.DropDownList("CityID", new SelectList(ViewBag.ddlCity, "Id", "Name"), new { @class = "form-control", @id = "ddlCityID" })
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
+                    <button type="button" id="btnSave" onclick="SaveStreets()" class="btn btn-primary pull-left">@resx.Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+</div>
+<!-- End Model  -->
+<script>
+    $(document).ready(
+        function bind() {
+             console.log("it's defined")
+            setTableProp("#tblStreets");
+            $(".prog").fadeOut(500);
+          GetStreetsList();
+        }
+    );
+    function setTableProp(tbl) {
+        $(tbl).DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': false,
+            'info': true,
+            'autoWidth': false
+        });
+    }
+    var CurrentStreetsList = null;
+    function GetStreetsList() {
+       $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Streets/GetStreetsList",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Error" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong";
+                 //   $("#modal-danger").modal();
+                } else {
+                    CurrentStreetsList = data;
+                    var row = "";
+                    for (var i = 0; i < CurrentStreetsList.length; i++) {
+                        row += "<tr>" +
+                            "<td>" + CurrentStreetsList[i].Name + "</td>" +
+                            "<td>" + CurrentStreetsList[i].CityName + "</td>" +
+                            "<td style='width:150px;'>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Streets'  onclick='EditStreets(" + CurrentStreetsList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentStreetsList[i].Id +
+                            ")'>@resx.Delete</button>" +
+                            "</td>" +
+                            "</tr>";
+                    }
+                    $("#bodyStreets").html(row);
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                //$("#modal-danger").modal();
+            }
+        });
+    }
+    function SaveStreets() {
+        if (!checkValidtion_btnAddStreets()) return;
+        if (document.getElementById('titleStreets').innerHTML != "@resx.Add @resx.Streets") {
+            $.ajax({
+                url: "/Streets/EditStreets",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    Id: document.getElementById('lblStreetsId').value,
+                    Name: document.getElementById('Name').value,
+                    CityID: document.getElementById('ddlCityID').value ,
+                    IsDeleted : "N"
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Streets').modal('hide');
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Update" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgUpdate";
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                       document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/Streets/AddStreets",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    Name: document.getElementById('Name').value ,
+                     CityID: document.getElementById('ddlCityID').value
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Streets').modal('hide');
+                        document.getElementById('titleSuccess').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgSave" ;
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        clearStreets();
+    }
+    var city;
+    function EditStreets(ID) {
+        document.getElementById('titleStreets').innerHTML = "@resx.Edit @resx.Streets";
+        document.getElementById('btnSave').innerHTML = "@resx.Update";
+        document.getElementById('lblStreetsId').value = ID;
+        $.ajax({
+            url: "/Streets/BindStreets",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID }),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                  document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                    $("#modal-danger").modal();
+                } else {
+
+                    city = data;
+                    document.getElementById('Name').value = city[0].Name;
+                    document.getElementById('ddlCityID').value = city[0].CityID;
+
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                $("#modal-danger").modal();
+            }
+        });
+    }
+    function DeleteStreets() {
+        $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Streets/DeleteStreets",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: document.getElementById('lblStreetsId').value }),
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    $(".prog").fadeOut(500);
+                    document.getElementById('titleSuccess').innerHTML ="@resx.Delete" ;
+                    document.getElementById('MsgSuccess').innerHTML = "@resx.MsgDelete" ;
+                    $("#modal-success").modal();
+                } else {
+                   document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+              document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+                }
+            },
+            error: function (result) {
+                document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+               document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+            }
+        });
+
+    }
+    function showStreets() {
+        console.log("it's defined")
+        document.getElementById('titleStreets').innerHTML = "@resx.Add @resx.Streets";
+        document.getElementById('btnSave').innerHTML = "@resx.Save";
+    }
+    function clearStreets() {
+        //location.reload();
+       document.getElementById('Name').value = "";
+       document.getElementById('ddlCityID').value = "";
+    }
+    function checkValidtion_btnAddStreets() {
+        var isVaild = true;
+        if (!$('#Name')[0].checkValidity()) {
+            document.getElementById('reName').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reName').innerHTML = "*";
+        }
+
+        return isVaild;
+    }
+    function OKR() {
+        GetStreetsList();
+        clearStreets();
+       // top.location.href = "/Streets";
+    }
+    function closeModel() {
+          clearStreets();
+    }
+    function ConfirmDelete() {
+        DeleteStreets();
+    }
+
+    function Delete(Id) {
+         document.getElementById('lblStreetsId').value = Id;
+          document.getElementById('titleWarning').innerHTML ="@resx.Delete" ;
+        document.getElementById('MsgWarning').innerHTML = "@resx.MsgWarningDelete" ;
+        $("#modal-warning").modal();
+    }
+</script>

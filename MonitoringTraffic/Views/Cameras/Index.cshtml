@@ -1,0 +1,326 @@
+﻿@using resx = MonitoringTraffic.Resources.AR
+@{
+    ViewBag.Title = resx.Cameras;
+    ViewBag.Title = "Monitoring Traffic";// Session["CamerasName"];
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @resx.Manage @resx.Cameras
+        <small>@resx.Cameras</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.Cameras</a></li>
+        <li class="active">@resx.Cameras</li>
+    </ol>
+
+</section>
+<!-- Main content -->
+<!-- Table  -->
+<section class="content">
+    <div class="row">
+        <div class="box center-block">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <button type="button" onclick="showCameras()" data-toggle="modal" data-target="#modal-Cameras" class="btn btn-primary">@resx.Add  @resx.Camera</button>
+                </h3>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="box-body col-md-10">
+                <table id="tblCameras" class="table table-bordered table-hover table-striped dataTabler">
+                    <thead style="background-color: #3c8dbc">
+
+                        <tr>
+                            <th>@resx.IpAddress @resx.theCamera</th>
+                            <th>@resx.Pin @resx.theCamera</th>
+                            <th>@resx.Name @resx.theStreet</th>
+                            <th>@resx.Name @resx.theCity</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="bodyCameras"></tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</section>
+<!-- End Table  -->
+<!-- Model  -->
+<div class="modal fade" id="modal-Cameras">
+    <div class="modal-dialog">
+        <label hidden id="lblCamerasId"></label>
+        <div class="modal-content">
+            <div class="modal-header bg-aqua">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="titleCameras" class="modal-title">@resx.Add @resx.Cameras</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>@resx.IpAddress <span id="reIpAddress" style="color:red"> * </span></label>
+                        <input type="text" required id="IpAddress" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <label>@resx.Pin <span id="rePin" style="color:red"> * </span></label>
+                        <input type="text" required id="Pin" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>@resx.theStreet  <span style="color:red">*</span></label>
+                        @Html.DropDownList("StreetID", new SelectList(ViewBag.ddlStreet, "Id", "Name"), new { @class = "form-control", @id = "ddlStreetID" })
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
+                    <button type="button" id="btnSave" onclick="SaveCameras()" class="btn btn-primary pull-left">@resx.Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+</div>
+<!-- End Model  -->
+<script>
+    $(document).ready(
+        function bind() {
+             console.log("it's defined")
+            setTableProp("#tblCameras");
+            $(".prog").fadeOut(500);
+          GetCamerasList();
+        }
+    );
+    function setTableProp(tbl) {
+        $(tbl).DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': false,
+            'info': true,
+            'autoWidth': false
+        });
+    }
+    var CurrentCamerasList = null;
+    function GetCamerasList() {
+       $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Cameras/GetCamerasList",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Error" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong";
+                 //   $("#modal-danger").modal();
+                } else {
+                    CurrentCamerasList = data;
+                    var row = "";
+                    for (var i = 0; i < CurrentCamerasList.length; i++) {
+                        row += "<tr>" +
+                            "<td>" + CurrentCamerasList[i].IpAddress + "</td>" +
+                            "<td>" + CurrentCamerasList[i].Pin + "</td>" +
+                            "<td>" + CurrentCamerasList[i].StreetName + "</td>" +
+                            "<td>" + CurrentCamerasList[i].CityName + "</td>" +
+                            "<td style='width:150px;'>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Cameras'  onclick='EditCameras(" + CurrentCamerasList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentCamerasList[i].Id +
+                            ")'>@resx.Delete</button>" +
+                            "</td>" +
+                            "</tr>";
+                    }
+                    $("#bodyCameras").html(row);
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                //$("#modal-danger").modal();
+            }
+        });
+    }
+    function SaveCameras() {
+        if (!checkValidtion_btnAddCameras()) return;
+        if (document.getElementById('titleCameras').innerHTML != "@resx.Add @resx.Cameras") {
+            $.ajax({
+                url: "/Cameras/EditCameras",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    Id: document.getElementById('lblCamerasId').value,
+                    IpAddress: document.getElementById('IpAddress').value,
+                    Pin: document.getElementById('Pin').value,
+                    StreetID: document.getElementById('ddlStreetID').value ,
+                    IsDeleted : "N"
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Cameras').modal('hide');
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Update" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgUpdate";
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                       document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/Cameras/AddCameras",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    IpAddress: document.getElementById('IpAddress').value ,
+                    Pin: document.getElementById('Pin').value ,
+                     StreetID: document.getElementById('ddlStreetID').value
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Cameras').modal('hide');
+                        document.getElementById('titleSuccess').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgSave" ;
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        clearCameras();
+    }
+    var camera;
+    function EditCameras(ID) {
+        document.getElementById('titleCameras').innerHTML = "@resx.Edit @resx.Cameras";
+        document.getElementById('btnSave').innerHTML = "@resx.Update";
+        document.getElementById('lblCamerasId').value = ID;
+        $.ajax({
+            url: "/Cameras/BindCameras",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID }),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                  document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                    $("#modal-danger").modal();
+                } else {
+
+                    camera = data;
+                   
+                    document.getElementById('IpAddress').value = camera[0].IpAddress;
+                    document.getElementById('Pin').value = camera[0].Pin;
+                    document.getElementById('ddlStreetID').value = camera[0].StreetID;
+
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                $("#modal-danger").modal();
+            }
+        });
+    }
+    function DeleteCameras() {
+        $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Cameras/DeleteCameras",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: document.getElementById('lblCamerasId').value }),
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    $(".prog").fadeOut(500);
+                    document.getElementById('titleSuccess').innerHTML ="@resx.Delete" ;
+                    document.getElementById('MsgSuccess').innerHTML = "@resx.MsgDelete" ;
+                    $("#modal-success").modal();
+                } else {
+                   document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+              document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+                }
+            },
+            error: function (result) {
+                document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+               document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+            }
+        });
+
+    }
+    function showCameras() {
+        console.log("it's defined")
+        document.getElementById('titleCameras').innerHTML = "@resx.Add @resx.Cameras";
+        document.getElementById('btnSave').innerHTML = "@resx.Save";
+    }
+    function clearCameras() {
+        //location.reload();
+       document.getElementById('IpAddress').value = "";
+       document.getElementById('Pin').value = "";
+       document.getElementById('ddlStreetID').value = "";
+    }
+    function checkValidtion_btnAddCameras() {
+        var isVaild = true;
+        if (!$('#IpAddress')[0].checkValidity()) {
+            document.getElementById('reIpAddress').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reIpAddress').innerHTML = "*";
+        }
+         if (!$('#Pin')[0].checkValidity()) {
+            document.getElementById('rePin').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('rePin').innerHTML = "*";
+        }
+
+        return isVaild;
+    }
+    function OKR() {
+        GetCamerasList();
+        clearCameras();
+       // top.location.href = "/Cameras";
+    }
+    function closeModel() {
+          clearCameras();
+    }
+    function ConfirmDelete() {
+        DeleteCameras();
+    }
+
+    function Delete(Id) {
+         document.getElementById('lblCamerasId').value = Id;
+          document.getElementById('titleWarning').innerHTML ="@resx.Delete" ;
+        document.getElementById('MsgWarning').innerHTML = "@resx.MsgWarningDelete" ;
+        $("#modal-warning").modal();
+    }
+</script>
