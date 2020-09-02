@@ -15,7 +15,7 @@ namespace MonitoringTraffic.Controllers
         {
             var city = db.City.ToList();
             return View(city);
-        }
+        } 
         [HttpPost]
         public JsonResult GetCitiesList()
         {
