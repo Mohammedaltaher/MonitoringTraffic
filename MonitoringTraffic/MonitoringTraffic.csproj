@@ -47,7 +47,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Apis, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.49.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.49.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.49.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.49.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.49.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Analytics, Version=2.2.0.0, Culture=neutral, PublicKeyToken=9e229226d7996434, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Analytics.2.2.0.0\lib\Google.GData.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Client.2.2.0.0\lib\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.GData.Extensions.2.2.0.0\lib\Google.GData.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -102,9 +129,6 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -192,8 +216,23 @@
     <Compile Include="Migrations\202002161356369_addCameraModel.Designer.cs">
       <DependentUpon>202002161356369_addCameraModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009031214465_updateCamera.cs" />
+    <Compile Include="Migrations\202009031214465_updateCamera.Designer.cs">
+      <DependentUpon>202009031214465_updateCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009031215481_upf.cs" />
+    <Compile Include="Migrations\202009031215481_upf.Designer.cs">
+      <DependentUpon>202009031215481_upf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009080627316_updateCamera1.cs" />
+    <Compile Include="Migrations\202009080627316_updateCamera1.Designer.cs">
+      <DependentUpon>202009080627316_updateCamera1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApiAuth.cs" />
     <Compile Include="Models\Camera.cs" />
+    <Compile Include="Models\GoogleAnalyticsApi.cs" />
+    <Compile Include="Models\IPageViewCounter.cs" />
     <Compile Include="Models\Street.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\City.cs" />
@@ -7302,6 +7341,7 @@
     <Content Include="Views\Cities\Index.cshtml" />
     <Content Include="Views\Streets\Index.cshtml" />
     <Content Include="Views\Cameras\Index.cshtml" />
+    <Content Include="Views\Cameras\View.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7338,6 +7378,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002161356369_addCameraModel.resx">
       <DependentUpon>202002161356369_addCameraModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009031214465_updateCamera.resx">
+      <DependentUpon>202009031214465_updateCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009031215481_upf.resx">
+      <DependentUpon>202009031215481_upf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009080627316_updateCamera1.resx">
+      <DependentUpon>202009080627316_updateCamera1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

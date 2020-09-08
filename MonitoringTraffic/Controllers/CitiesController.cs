@@ -13,8 +13,11 @@ namespace MonitoringTraffic.Controllers
         Context db = new Context();
         public ActionResult Index()
         {
+            GooglePageViewCounter p = new GooglePageViewCounter();
+            Console.WriteLine(p.GetActiveUsers());
             var city = db.City.ToList();
             return View(city);
+       
         } 
         [HttpPost]
         public JsonResult GetCitiesList()

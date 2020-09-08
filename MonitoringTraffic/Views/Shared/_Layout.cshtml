@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177187832-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-177187832-2');
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title</title>
@@ -32,14 +41,194 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    
+
     <![endif]-->
     <!-- Google Font -->
     @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">*@
     <!-- jQuery 3 -->
     <script src="../../Content/AdminLTE_RTL/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        /**
+         * Sample JavaScript code for analytics.data.realtime.get
+         * See instructions for running APIs Explorer code samples locally:
+         * https://developers.google.com/explorer-help/guides/code_samples#javascript
+         */
+
+        function authenticate() {
+            return gapi.auth2.getAuthInstance()
+                .signIn({ scope: "https://www.googleapis.com/auth/analytics https://www.googleapis.com/auth/analytics.readonly" })
+                .then(function () { console.log("Sign-in successful"); },
+                    function (err) { console.error("Error signing in", err); });
+        }
+        function loadClient() {
+            gapi.client.setApiKey("AIzaSyAKPlty59N_szeLDpXiLpkBbd6To9l5Q90");
+            return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/analytics/v3/rest")
+                .then(function () { console.log("GAPI client loaded for API"); },
+                    function (err) { console.error("Error loading GAPI client for API", err); });
+        }
+        // Make sure the client is loaded and sign-in is complete before calling this method.
+        function execute() {
+            authenticate();
+            loadClient();
+            return gapi.client.analytics.data.realtime.get({
+                "ids": "ga:228149325",
+                "metrics": "rt:activeUsers"
+            })
+                .then(function (response) {
+                    // Handle the results here (response.result has the parsed body).
+                    console.log("Response", response);
+                },
+                    function (err) { console.error("Execute error", err); });
+        }
+        gapi.load("client:auth2", function () {
+            gapi.auth2.init({ client_id: "856192773930-v1f1fa0g9qj7ouho592ldkg3hi5fd4ei.apps.googleusercontent.com" });
+        });
+    </script>
+    Response
+
 </head>
 <body dir="rtl" class="hold-transition skin-blue sidebar-mini">
+    <button onclick="authenticate().then(loadClient)">authorize and load</button>
+    <button onclick="execute()">execute</button>
+    <!--<div>
+        <p>Google Apps Script API Quickstart</p>-->
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <!--<button id="authorize_button" style="display: none;">Authorize</button>
+        <button id="signout_button" style="display: none;">Sign Out</button>
+
+        <pre id="content" style="white-space: pre-wrap;"></pre>
+
+        <script type="text/javascript">
+            // Client ID and API key from the Developer Console
+            var CLIENT_ID = '856192773930-v1f1fa0g9qj7ouho592ldkg3hi5fd4ei.apps.googleusercontent.com';
+            var API_KEY = 'AIzaSyAKPlty59N_szeLDpXiLpkBbd6To9l5Q90';
+
+            // Array of API discovery doc URLs for APIs used by the quickstart
+            var DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
+
+            // Authorization scopes required by the API; multiple scopes can be
+            // included, separated by spaces.
+            var SCOPES = 'https://www.googleapis.com/auth/script.projects';
+
+            var authorizeButton = document.getElementById('authorize_button');
+            var signoutButton = document.getElementById('signout_button');
+
+            /**
+             *  On load, called to load the auth2 library and API client library.
+             */
+            function handleClientLoad() {
+                gapi.load('client:auth2', initClient);
+            }
+
+            /**
+             *  Initializes the API client library and sets up sign-in state
+             *  listeners.
+             */
+            function initClient() {
+                gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES
+                }).then(function () {
+                    // Listen for sign-in state changes.
+                    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                    // Handle the initial sign-in state.
+                    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                    authorizeButton.onclick = handleAuthClick;
+                    signoutButton.onclick = handleSignoutClick;
+                }, function (error) {
+                    appendPre(JSON.stringify(error, null, 2));
+                });
+            }
+
+            /**
+             *  Called when the signed in status changes, to update the UI
+             *  appropriately. After a sign-in, the API is called.
+             */
+            function updateSigninStatus(isSignedIn) {
+                if (isSignedIn) {
+                    authorizeButton.style.display = 'none';
+                    signoutButton.style.display = 'block';
+                    callAppsScript();
+                } else {
+                    authorizeButton.style.display = 'block';
+                    signoutButton.style.display = 'none';
+                }
+            }
+
+            /**
+             *  Sign in the user upon button click.
+             */
+            function handleAuthClick(event) {
+                gapi.auth2.getAuthInstance().signIn();
+            }
+
+            /**
+             *  Sign out the user upon button click.
+             */
+            function handleSignoutClick(event) {
+                gapi.auth2.getAuthInstance().signOut();
+            }
+
+            /**
+             * Append a pre element to the body containing the given message
+             * as its text node. Used to display the results of the API call.
+             *
+             *  {string} message Text to be placed in pre element.
+             */
+            function appendPre(message) {
+                var pre = document.getElementById('content');
+                var textContent = document.createTextNode(message + '\n');
+                pre.appendChild(textContent);
+            }
+
+            /**
+             * Shows basic usage of the Apps Script API.
+             *
+             * Call the Apps Script API to create a new script project, upload files
+             * to the project, and log the script's URL to the user.
+             */
+            function callAppsScript() {
+                gapi.client.script.projects.create({
+                    resource: {
+                        title: 'My Script'
+                    }
+                }).then((resp) => {
+                    return gapi.client.script.projects.updateContent({
+                        scriptId: resp.result.scriptId,
+                        resource: {
+                            files: [{
+                                name: 'hello',
+                                type: 'SERVER_JS',
+                                source: 'function helloWorld() {\n  console.log("Hello, world!");\n}'
+                            }, {
+                                name: 'appsscript',
+                                type: 'JSON',
+                                source: "{\"timeZone\":\"America/New_York\",\"" +
+                                    "exceptionLogging\":\"CLOUD\"}"
+                            }]
+                        }
+                    });
+                }).then((resp) => {
+                    let result = resp.result;
+                    if (result.error) throw result.error;
+                    console.log(`https://script.google.com/d/${result.scriptId}/edit`);
+                }).catch((error) => {
+                    // The API encountered a problem.
+                    return console.log(`The API returned an error: ${error}`);
+                });
+            }
+
+        </script>
+
+        <script async defer src="https://apis.google.com/js/api.js"
+                onload="this.onload=function(){};handleClientLoad()"
+                onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>
+    </div>-->
     <div class="wrapper">
         <i style=" color: white; position: fixed; margin-top: 5px; margin-right: 700px; z-index: 9999;" class="prog fa fa-spinner fa-3x fa-spin"></i>
         <header class="main-header">
@@ -341,17 +530,17 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">القائمة الرئسية</li>
                     @*<li class="active treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-left"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="active"><a href="../../Content/AdminLTE_RTL/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li><a href="../../Content/AdminLTE_RTL/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
-                    </li>*@
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-left"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="../../Content/AdminLTE_RTL/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                                <li><a href="../../Content/AdminLTE_RTL/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                            </ul>
+                        </li>*@
                     <li class="treeview menu-open">
                         <a href="#">
                             <i class="fa fa-camera"></i>
@@ -637,7 +826,7 @@
         </aside>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
-     immediately after the control sidebar -->
+        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
 
     </div>

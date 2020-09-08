@@ -11,7 +11,11 @@ namespace MonitoringTraffic.Models
         public int StreetID { get; set; }
         public Street Street { get; set; }
         public string Pin { get; set; }
+        public int? Diriction { get; set; }
+        public bool? IsIn { get; set; }
         public string IpAddress { get; set; }
         public string IsDeleted { get; set; }
+        public DateTime? Date { get; set; }
+        public int? Count { get; set; }
     }
 }
