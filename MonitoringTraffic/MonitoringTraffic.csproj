@@ -228,8 +228,18 @@
     <Compile Include="Migrations\202009080627316_updateCamera1.Designer.cs">
       <DependentUpon>202009080627316_updateCamera1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009081023245_addUserAndUserType.cs" />
+    <Compile Include="Migrations\202009081023245_addUserAndUserType.Designer.cs">
+      <DependentUpon>202009081023245_addUserAndUserType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009081024530_addUserAndUserType2.cs" />
+    <Compile Include="Migrations\202009081024530_addUserAndUserType2.Designer.cs">
+      <DependentUpon>202009081024530_addUserAndUserType2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiAuth.cs" />
+    <Compile Include="Models\UserType.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Camera.cs" />
     <Compile Include="Models\GoogleAnalyticsApi.cs" />
     <Compile Include="Models\IPageViewCounter.cs" />
@@ -7387,6 +7397,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009080627316_updateCamera1.resx">
       <DependentUpon>202009080627316_updateCamera1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009081023245_addUserAndUserType.resx">
+      <DependentUpon>202009081023245_addUserAndUserType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009081024530_addUserAndUserType2.resx">
+      <DependentUpon>202009081024530_addUserAndUserType2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
