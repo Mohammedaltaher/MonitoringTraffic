@@ -236,8 +236,18 @@
     <Compile Include="Migrations\202009081024530_addUserAndUserType2.Designer.cs">
       <DependentUpon>202009081024530_addUserAndUserType2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009201033593_updateStreet.cs" />
+    <Compile Include="Migrations\202009201033593_updateStreet.Designer.cs">
+      <DependentUpon>202009201033593_updateStreet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009221034152_updateStreet1.cs" />
+    <Compile Include="Migrations\202009221034152_updateStreet1.Designer.cs">
+      <DependentUpon>202009221034152_updateStreet1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiAuth.cs" />
+    <Compile Include="Models\Dirctions.cs" />
+    <Compile Include="Models\StreetPosstions.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Camera.cs" />
@@ -7403,6 +7413,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009081024530_addUserAndUserType2.resx">
       <DependentUpon>202009081024530_addUserAndUserType2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009201033593_updateStreet.resx">
+      <DependentUpon>202009201033593_updateStreet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009221034152_updateStreet1.resx">
+      <DependentUpon>202009221034152_updateStreet1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

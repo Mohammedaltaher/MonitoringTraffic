@@ -20,6 +20,7 @@ namespace MonitoringTraffic.Models
         public DbSet<Camera> Camera { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserType> UserType { get; set; }
+        public DbSet<StreetPosstions> StreetPosstions { get; set; }
 
     }
 }
