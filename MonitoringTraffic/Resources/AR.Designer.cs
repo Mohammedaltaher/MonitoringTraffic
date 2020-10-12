@@ -88,6 +88,15 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        public static string Capacity {
+            get {
+                return ResourceManager.GetString("Capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to المدن.
         /// </summary>
         public static string Cities {
@@ -133,6 +142,15 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diraction.
+        /// </summary>
+        public static string Diractions {
+            get {
+                return ResourceManager.GetString("Diractions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نعديل.
         /// </summary>
         public static string Edit {
@@ -151,6 +169,24 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EndLatitude.
+        /// </summary>
+        public static string EndLatitude {
+            get {
+                return ResourceManager.GetString("EndLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EndLongitude.
+        /// </summary>
+        public static string EndLongitude {
+            get {
+                return ResourceManager.GetString("EndLongitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حطأ.
         /// </summary>
         public static string Error {
@@ -160,11 +196,38 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IP.
         /// </summary>
         public static string IpAddress {
             get {
                 return ResourceManager.GetString("IpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latitude.
+        /// </summary>
+        public static string Latitude {
+            get {
+                return ResourceManager.GetString("Latitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longitude.
+        /// </summary>
+        public static string Longitude {
+            get {
+                return ResourceManager.GetString("Longitude", resourceCulture);
             }
         }
         
@@ -358,11 +421,38 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to StartLatitude.
+        /// </summary>
+        public static string StartLatitude {
+            get {
+                return ResourceManager.GetString("StartLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StartLongitude.
+        /// </summary>
+        public static string StartLongitude {
+            get {
+                return ResourceManager.GetString("StartLongitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to طريق.
         /// </summary>
         public static string Street {
             get {
                 return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StreetPosstions.
+        /// </summary>
+        public static string StreetPosstions {
+            get {
+                return ResourceManager.GetString("StreetPosstions", resourceCulture);
             }
         }
         
@@ -408,6 +498,15 @@ namespace MonitoringTraffic.Resources {
         public static string theStreet {
             get {
                 return ResourceManager.GetString("theStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         

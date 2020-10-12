@@ -33,7 +33,13 @@
 
                         <tr>
                             <th>@resx.Name @resx.theStreet</th>
-                            <th>@resx.Name @resx.theCity</th>
+                            <th>@resx.StartLatitude</th>
+                            <th>@resx.StartLongitude  </th>
+                            <th>@resx.EndLatitude  </th>
+                            <th>@resx.EndLongitude  </th>
+                            <th>@resx.From </th>
+                            <th>@resx.To </th>
+                            <th>@resx.Capacity  </th>
                             <th></th>
 
                         </tr>
@@ -65,6 +71,42 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">
+                        <label>@resx.StartLatitude <span id="reStartLatitude" style="color:red"> * </span></label>
+                        <input type="text" required id="StartLatitude" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>@resx.StartLongitude <span id="reStartLongitude" style="color:red"> * </span></label>
+                        <input type="text" required id="StartLongitude" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>@resx.EndLatitude <span id="reEndLatitude" style="color:red"> * </span></label>
+                        <input type="text" required id="EndLatitude" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>@resx.EndLongitude <span id="reEndLongitude" style="color:red"> * </span></label>
+                        <input type="text" required id="EndLongitude" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>@resx.From <span id="reFrom" style="color:red"> * </span></label>
+                        <input type="text" required id="From" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>@resx.To <span id="reTo" style="color:red"> * </span></label>
+                        <input type="text" required id="To" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>@resx.Capacity <span id="reCapacity" style="color:red"> * </span></label>
+                        <input type="text" required id="Capacity" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <label>@resx.theCity  <span style="color:red">*</span></label>
                         @Html.DropDownList("CityID", new SelectList(ViewBag.ddlCity, "Id", "Name"), new { @class = "form-control", @id = "ddlCityID" })
@@ -72,7 +114,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
+                    <button type="button" onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
                     <button type="button" id="btnSave" onclick="SaveStreets()" class="btn btn-primary pull-left">@resx.Save</button>
                 </div>
             </div>
@@ -122,7 +164,13 @@
                     for (var i = 0; i < CurrentStreetsList.length; i++) {
                         row += "<tr>" +
                             "<td>" + CurrentStreetsList[i].Name + "</td>" +
-                            "<td>" + CurrentStreetsList[i].CityName + "</td>" +
+                            "<td>" + CurrentStreetsList[i].StartLatitude + "</td>" +
+                            "<td>" + CurrentStreetsList[i].StartLongitude + "</td>" +
+                            "<td>" + CurrentStreetsList[i].EndLatitude + "</td>" +
+                            "<td>" + CurrentStreetsList[i].EndLongitude + "</td>" +
+                            "<td>" + CurrentStreetsList[i].From + "</td>" +
+                            "<td>" + CurrentStreetsList[i].To + "</td>" +
+                            "<td>" + CurrentStreetsList[i].Capacity + "</td>" +
                             "<td style='width:150px;'>" +
                             "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Streets'  onclick='EditStreets(" + CurrentStreetsList[i].Id + ")'>@resx.Edit</button>" +
                             "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentStreetsList[i].Id +
@@ -150,6 +198,13 @@
                 data: JSON.stringify({
                     Id: document.getElementById('lblStreetsId').value,
                     Name: document.getElementById('Name').value,
+                    StartLatitude: document.getElementById('StartLatitude').value,
+                    StartLongitude: document.getElementById('StartLongitude').value,
+                    EndLatitude: document.getElementById('EndLatitude').value,
+                    EndLongitude: document.getElementById('EndLongitude').value,
+                    From: document.getElementById('From').value,
+                    To: document.getElementById('To').value,
+                    Capacity: document.getElementById('Capacity').value,
                     CityID: document.getElementById('ddlCityID').value ,
                     IsDeleted : "N"
                 }),
@@ -179,7 +234,14 @@
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({
-                    Name: document.getElementById('Name').value ,
+                    Name: document.getElementById('Name').value,
+                    StartLatitude: document.getElementById('StartLatitude').value,
+                    StartLongitude: document.getElementById('StartLongitude').value,
+                    EndLatitude: document.getElementById('EndLatitude').value,
+                    EndLongitude: document.getElementById('EndLongitude').value,
+                    From: document.getElementById('From').value,
+                    To: document.getElementById('To').value,
+                    Capacity: document.getElementById('Capacity').value,
                      CityID: document.getElementById('ddlCityID').value
                 }),
                 dataType: "json",
@@ -225,6 +287,13 @@
 
                     city = data;
                     document.getElementById('Name').value = city[0].Name;
+                    document.getElementById('StartLatitude').value = city[0].StartLatitude;
+                    document.getElementById('StartLongitude').value = city[0].StartLongitude;
+                    document.getElementById('EndLatitude').value = city[0].EndLatitude;
+                    document.getElementById('EndLongitude').value = city[0].EndLongitude;
+                    document.getElementById('From').value = city[0].From;
+                    document.getElementById('To').value = city[0].To;
+                    document.getElementById('Capacity').value = city[0].Capacity;
                     document.getElementById('ddlCityID').value = city[0].CityID;
 
                 }
@@ -283,7 +352,48 @@
         } else {
             document.getElementById('reName').innerHTML = "*";
         }
-
+        if (!$('#StartLatitude')[0].checkValidity()) {
+            document.getElementById('reStartLatitude').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reStartLatitude').innerHTML = "*";
+        }
+        if (!$('#StartLongitude')[0].checkValidity()) {
+            document.getElementById('reStartLongitude').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reStartLongitude').innerHTML = "*";
+        }
+        if (!$('#EndLatitude')[0].checkValidity()) {
+            document.getElementById('reEndLatitude').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reEndLatitude').innerHTML = "*";
+        }
+        if (!$('#EndLongitude')[0].checkValidity()) {
+            document.getElementById('reEndLongitude').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reEndLongitude').innerHTML = "*";
+        }
+        if (!$('#From')[0].checkValidity()) {
+            document.getElementById('reFrom').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reFrom').innerHTML = "*";
+        }
+         if (!$('#To')[0].checkValidity()) {
+            document.getElementById('reTo').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reTo').innerHTML = "*";
+        }
+        if (!$('#Capacity')[0].checkValidity()) {
+            document.getElementById('reCapacity').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reCapacity').innerHTML = "*";
+        }
         return isVaild;
     }
     function OKR() {

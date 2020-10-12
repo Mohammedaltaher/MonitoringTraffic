@@ -194,6 +194,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\StreetPosstionsController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CameraController.cs" />
     <Compile Include="Controllers\StreetsController.cs" />
@@ -244,15 +245,20 @@
     <Compile Include="Migrations\202009221034152_updateStreet1.Designer.cs">
       <DependentUpon>202009221034152_updateStreet1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010122000261_ddds.cs" />
+    <Compile Include="Migrations\202010122000261_ddds.Designer.cs">
+      <DependentUpon>202010122000261_ddds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010122053065_ddds6.cs" />
+    <Compile Include="Migrations\202010122053065_ddds6.Designer.cs">
+      <DependentUpon>202010122053065_ddds6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApiAuth.cs" />
     <Compile Include="Models\Dirctions.cs" />
     <Compile Include="Models\StreetPosstions.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Camera.cs" />
-    <Compile Include="Models\GoogleAnalyticsApi.cs" />
-    <Compile Include="Models\IPageViewCounter.cs" />
     <Compile Include="Models\Street.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\City.cs" />
@@ -7345,6 +7351,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\StreetPosstions\View.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -7362,6 +7369,7 @@
     <Content Include="Views\Streets\Index.cshtml" />
     <Content Include="Views\Cameras\Index.cshtml" />
     <Content Include="Views\Cameras\View.html" />
+    <Content Include="Views\StreetPosstions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7419,6 +7427,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009221034152_updateStreet1.resx">
       <DependentUpon>202009221034152_updateStreet1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010122000261_ddds.resx">
+      <DependentUpon>202010122000261_ddds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010122053065_ddds6.resx">
+      <DependentUpon>202010122053065_ddds6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

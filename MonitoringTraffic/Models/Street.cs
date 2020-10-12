@@ -20,8 +20,8 @@ namespace MonitoringTraffic.Models
         public float? EndLongitude { get; set; }
 
         public int? DiractionsID { get; set; }
-        public Diractions Diractions { get; set; }
-
+        public string From { get; set; }
+        public string To { get; set; }
         public string IsDeleted { get; set; }
     }
 }

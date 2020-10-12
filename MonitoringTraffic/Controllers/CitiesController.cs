@@ -13,8 +13,6 @@ namespace MonitoringTraffic.Controllers
         Context db = new Context();
         public ActionResult Index()
         {
-            GooglePageViewCounter p = new GooglePageViewCounter();
-            Console.WriteLine(p.GetActiveUsers());
             var city = db.City.ToList();
             return View(city);
        
@@ -67,7 +65,7 @@ namespace MonitoringTraffic.Controllers
                 db.SaveChanges();
                 return Json(new { code = 1 });
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException )
             {
                 //foreach (var eve in e.EntityValidationErrors)
                 //{

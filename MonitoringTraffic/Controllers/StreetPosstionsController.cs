@@ -8,36 +8,30 @@ using System.Web.Mvc;
 
 namespace MonitoringTraffic.Controllers
 {
-    public class CamerasController : Controller
+    public class StreetPosstionsController : Controller
     {
         Context db = new Context();
         public ActionResult Index()
         {
             ViewBag.ddlStreet = db.Street.Where(ac => ac.IsDeleted != "Y").ToList();
-            var camera = db.Camera.ToList();
-            return View(camera);
+            var StreetPosstions = db.StreetPosstions.ToList();
+            return View(StreetPosstions);
         }
         [HttpPost]
-        public JsonResult GetCamerasList()
+        public JsonResult GetStreetPosstionsList()
         {
             try
             {
-                var cameraList = db.Camera.Where(c => c.IsDeleted != "Y").Select(a => new
+                var StreetPosstionsList = db.StreetPosstions.Where(c => c.IsDeleted != "Y").Select(a => new
                 {
                     a.Id,
-                    a.IpAddress  ,
-                    a.Latitude,
+                    a.Latitude  ,
                     a.Longitude,
-                    a.IsInStreetBegaining,
-                    a.Diriction,
-                    a.Count,
-                    a.Date ,
-                    a.IsIn,
+                    a.Name,
                     StreetName = a.Street.Name,
-                    CityName = a.Street.City.Name
                 }).ToList();
 
-                return Json(cameraList, JsonRequestBehavior.AllowGet);
+                return Json(StreetPosstionsList, JsonRequestBehavior.AllowGet);
             }
             catch
             {
@@ -45,27 +39,22 @@ namespace MonitoringTraffic.Controllers
             }
         }
 
-        public JsonResult BindCameras(int id)
+        public JsonResult BindStreetPosstions(int id)
         {
             try
             {
                 // int ID = int.Parse(id);
 
-                var camera = db.Camera.Where(c => c.Id == id).Select(a => new
+                var StreetPosstions = db.StreetPosstions.Where(c => c.Id == id).Select(a => new
                 {
                     a.Id,
-                    a.IpAddress,
                     a.Latitude,
                     a.Longitude,
-                    a.IsInStreetBegaining,
-                    a.Diriction,
-                    a.Count,
-                    a.Date,
-                    a.IsIn,
+                    a.Name,
                     a.StreetID
 
                 });
-                return Json(camera, JsonRequestBehavior.AllowGet);
+                return Json(StreetPosstions, JsonRequestBehavior.AllowGet);
             }
             catch
             {
@@ -73,12 +62,12 @@ namespace MonitoringTraffic.Controllers
             }
         }
         [HttpPost]
-        public JsonResult AddCameras(Camera camera)
+        public JsonResult AddStreetPosstions(StreetPosstions StreetPosstions)
         {
             try
             {
-                camera.IsDeleted = "N";
-                db.Camera.Add(camera);
+                StreetPosstions.IsDeleted = "N";
+                db.StreetPosstions.Add(StreetPosstions);
                 db.SaveChanges();
                 return Json(new { code = 1 });
             }
@@ -100,21 +89,16 @@ namespace MonitoringTraffic.Controllers
 
         }
         [HttpPost]
-        public ActionResult EditCameras(Camera camera)
+        public ActionResult EditStreetPosstions(StreetPosstions StreetPosstions)
         {
             try
             {
-                var inDB = db.Camera.SingleOrDefault(B => B.Id == camera.Id);
-                inDB.IpAddress = camera.IpAddress;
-                inDB.Latitude = camera.Latitude;
-                inDB.Longitude = camera.Longitude;
-                inDB.IsInStreetBegaining = camera.IsInStreetBegaining;
-                inDB.StreetID = camera.StreetID;
+                var inDB = db.StreetPosstions.SingleOrDefault(B => B.Id == StreetPosstions.Id);
+                inDB.Longitude = StreetPosstions.Longitude;
+                inDB.Latitude = StreetPosstions.Latitude;
+                inDB.StreetID = StreetPosstions.StreetID;
                 inDB.IsDeleted = "N" ;
-                inDB.IsIn = camera.IsIn;
-                inDB.Diriction = camera.Diriction;
-                inDB.Date = camera.Date;
-                inDB.Count = camera.Count;
+                inDB.Name = StreetPosstions.Name;
                 db.SaveChanges();
                 return Json(new { code = 1 });
             }
@@ -124,11 +108,11 @@ namespace MonitoringTraffic.Controllers
             }
         }
         [HttpPost]
-        public ActionResult DeleteCameras(int id)
+        public ActionResult DeleteStreetPosstions(int id)
         {
             try
             {
-                var inDB = db.Camera.SingleOrDefault(B => B.Id == id);
+                var inDB = db.StreetPosstions.SingleOrDefault(B => B.Id == id);
                 if (inDB != null)
                 {
                     inDB.IsDeleted = "Y";

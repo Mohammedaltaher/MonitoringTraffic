@@ -25,7 +25,14 @@ namespace MonitoringTraffic.Controllers
                 var streetList = db.Street.Where(c => c.IsDeleted != "Y").Select(a => new
                 {
                     a.Id,
-                    a.Name  ,
+                    a.Name,
+                    a.StartLatitude  ,
+                    a.StartLongitude ,
+                    a.EndLatitude  ,
+                    a.EndLongitude  ,
+                    a.Capacity  ,
+                    a.From,
+                    a.To,
                     CityName = a.City.Name
                 }).ToList();
 
@@ -47,6 +54,13 @@ namespace MonitoringTraffic.Controllers
                 {
                     a.Id,
                     a.Name,
+                    a.StartLatitude,
+                    a.StartLongitude,
+                    a.EndLatitude,
+                    a.EndLongitude,
+                    a.Capacity,
+                    a.From,
+                    a.To,
                     a.CityID
 
                 });
@@ -67,7 +81,7 @@ namespace MonitoringTraffic.Controllers
                 db.SaveChanges();
                 return Json(new { code = 1 });
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException )
             {
                 //foreach (var eve in e.EntityValidationErrors)
                 //{
@@ -91,6 +105,13 @@ namespace MonitoringTraffic.Controllers
             {
                 var inDB = db.Street.SingleOrDefault(B => B.Id == street.Id);
                 inDB.Name = street.Name;
+                inDB.StartLongitude = street.StartLongitude;
+                inDB.StartLatitude = street.StartLatitude;
+                inDB.EndLongitude = street.EndLongitude;
+                inDB.EndLatitude = street.EndLatitude;
+                inDB.Capacity = street.Capacity;
+                inDB.From = street.From;
+                inDB.To = street.To;
                 inDB.CityID = street.CityID;
                 inDB.IsDeleted = "N" ;
                 db.SaveChanges();
