@@ -23,5 +23,10 @@ namespace MonitoringTraffic.Models
         public string From { get; set; }
         public string To { get; set; }
         public string IsDeleted { get; set; }
+
+        public virtual ICollection<Camera> Cameras { get; set; }
+        public virtual ICollection<StreetPosstions> StreetPosstions { get; set; }
+
+
     }
 }

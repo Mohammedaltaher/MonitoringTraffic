@@ -14,5 +14,7 @@ namespace MonitoringTraffic.Models
         public Street Street { get; set; }
         public string Name { get; set; }
         public string IsDeleted { get; set; }
+
+
     }
 }

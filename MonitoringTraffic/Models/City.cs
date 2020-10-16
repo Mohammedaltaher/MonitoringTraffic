@@ -10,5 +10,7 @@ namespace MonitoringTraffic.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string IsDeleted { get; set; }
+        public virtual ICollection<Street> Streets { get; set; }
+
     }
 }

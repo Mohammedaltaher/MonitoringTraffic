@@ -253,6 +253,22 @@
     <Compile Include="Migrations\202010122053065_ddds6.Designer.cs">
       <DependentUpon>202010122053065_ddds6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010131842154_dada.cs" />
+    <Compile Include="Migrations\202010131842154_dada.Designer.cs">
+      <DependentUpon>202010131842154_dada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131916412_dfvsd.cs" />
+    <Compile Include="Migrations\202010131916412_dfvsd.Designer.cs">
+      <DependentUpon>202010131916412_dfvsd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131956316_dfvsddwe.cs" />
+    <Compile Include="Migrations\202010131956316_dfvsddwe.Designer.cs">
+      <DependentUpon>202010131956316_dfvsddwe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010132003007_dfvsddwed.cs" />
+    <Compile Include="Migrations\202010132003007_dfvsddwed.Designer.cs">
+      <DependentUpon>202010132003007_dfvsddwed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Dirctions.cs" />
     <Compile Include="Models\StreetPosstions.cs" />
@@ -7433,6 +7449,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010122053065_ddds6.resx">
       <DependentUpon>202010122053065_ddds6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131842154_dada.resx">
+      <DependentUpon>202010131842154_dada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131916412_dfvsd.resx">
+      <DependentUpon>202010131916412_dfvsd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131956316_dfvsddwe.resx">
+      <DependentUpon>202010131956316_dfvsddwe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010132003007_dfvsddwed.resx">
+      <DependentUpon>202010132003007_dfvsddwed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
