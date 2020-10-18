@@ -29,6 +29,7 @@ namespace MonitoringTraffic.Controllers
                     a.Latitude,
                     a.Longitude,
                     a.Diriction,
+                    a.IsInStreetBegaining,
                     StreetName = a.Street.Name,
                     CityName = a.Street.City.Name
                 }).ToList();
@@ -54,6 +55,7 @@ namespace MonitoringTraffic.Controllers
                     a.Latitude,
                     a.Longitude,
                     a.Diriction,
+                    a.IsInStreetBegaining,
                     a.StreetID
 
                 });
@@ -100,6 +102,7 @@ namespace MonitoringTraffic.Controllers
                 inDB.IpAddress = camera.IpAddress;
                 inDB.Latitude = camera.Latitude;
                 inDB.Longitude = camera.Longitude;
+                inDB.IsInStreetBegaining = camera.IsInStreetBegaining;
                 inDB.StreetID = camera.StreetID;
                 inDB.IsDeleted = "N" ;
                 inDB.Diriction = camera.Diriction;

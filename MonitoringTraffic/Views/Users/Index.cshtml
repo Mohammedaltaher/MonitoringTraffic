@@ -1,0 +1,382 @@
+﻿@using resx = MonitoringTraffic.Resources.AR
+@{
+    ViewBag.Title = resx.Users;
+    ViewBag.Title = "Monitoring Traffic";// Session["UsersName"];
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @resx.Manage @resx.Users
+        <small>@resx.Users</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.Users</a></li>
+        <li class="active">@resx.Users</li>
+    </ol>
+
+</section>
+<!-- Main content -->
+<!-- Table  -->
+<section class="content">
+    <div class="row">
+        <div class="box center-block">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <button type="button" onclick="showUsers()" data-toggle="modal" data-target="#modal-Users" class="btn btn-primary">@resx.Add  @resx.User</button>
+                </h3>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="box-body col-md-10">
+                <table id="tblUsers" class="table table-bordered table-hover table-striped dataTabler">
+                    <thead style="background-color: #3c8dbc">
+
+                        <tr>
+                            <th>@resx.Name @resx.User</th>
+                            <th>@resx.Email</th>
+                            <th>userName  </th>
+                            <th>@resx.Password  </th>
+                            <th>@resx.Phone  </th>
+                            <th>user type </th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="bodyUsers"></tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</section>
+<!-- End Table  -->
+<!-- Model  -->
+<div class="modal fade" id="modal-Users">
+    <div class="modal-dialog">
+        <label hidden id="lblUsersId"></label>
+        <div class="modal-content">
+            <div class="modal-header bg-aqua">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="titleUsers" class="modal-title">@resx.Add @resx.Users</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Full Name<span id="reFullName" style="color:red"> * </span></label>
+                        <input type="text" required id="FullName" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Username <span id="reUsername" style="color:red"> * </span></label>
+                        <input type="text" required id="Username" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email <span id="reEmail" style="color:red"> * </span></label>
+                        <input type="text" required id="Email" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Password<span id="rePassword" style="color:red"> * </span></label>
+                        <input type="text" required id="Password" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Confirm Password<span id="reConfirmPassword" style="color:red"> * </span></label>
+                        <input type="text" required id="ConfirmPassword" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Phone Number<span id="rePhoneNumber" style="color:red"> * </span></label>
+                        <input type="text" required id="PhoneNumber" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <label>User Type <span style="color:red">*</span></label>
+                        @Html.DropDownList("ddlUserType", new SelectList(ViewBag.ddlUserType, "Id", "Name"), new { @class = "form-control", @id = "ddlUserType" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
+                    <button type="button" id="btnSave" onclick="SaveUsers()" class="btn btn-primary pull-left">@resx.Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+</div>
+<!-- End Model  -->
+<script>
+    $(document).ready(
+        function bind() {
+             console.log("it's defined")
+            setTableProp("#tblUsers");
+            $(".prog").fadeOut(500);
+          GetUsersList();
+        }
+    );
+    function setTableProp(tbl) {
+        $(tbl).DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': false,
+            'info': true,
+            'autoWidth': false
+        });
+    }
+    var CurrentUsersList = null;
+    function GetUsersList() {
+       $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Users/GetUsersList",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Error" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong";
+                 //   $("#modal-danger").modal();
+                } else {
+                    CurrentUsersList = data;
+                    var row = "";
+                    for (var i = 0; i < CurrentUsersList.length; i++) {
+                        row += "<tr>" +
+                            "<td>" + CurrentUsersList[i].FullName + "</td>" +
+                            "<td>" + CurrentUsersList[i].Username + "</td>" +
+                            "<td>" + CurrentUsersList[i].UserTypeName + "</td>" +
+                            "<td>" + CurrentUsersList[i].Email + "</td>" +
+                            "<td>" + CurrentUsersList[i].Password + "</td>" +
+                            "<td>" + CurrentUsersList[i].PhoneNumber + "</td>" +
+                            "<td style='width:150px;'>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Users'  onclick='EditUsers(" + CurrentUsersList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentUsersList[i].Id +
+                            ")'>@resx.Delete</button>" +
+                            "</td>" +
+                            "</tr>";
+                    }
+                    $("#bodyUsers").html(row);
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                //$("#modal-danger").modal();
+            }
+        });
+    }
+    function SaveUsers() {
+        if (!checkValidtion_btnAddUsers()) return;
+        if (document.getElementById('titleUsers').innerHTML != "@resx.Add @resx.Users") {
+            $.ajax({
+                url: "/Users/EditUsers",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    Id: document.getElementById('lblUsersId').value,
+                    FullName: document.getElementById('FullName').value,
+                    Username: document.getElementById('Username').value,
+                    UserTypeId: document.getElementById('ddlUserType').value,
+                    Email: document.getElementById('Email').value,
+                    Password: document.getElementById('Password').value,
+                    PhoneNumber: document.getElementById('PhoneNumber').value,
+                    IsDeleted : "N"
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Users').modal('hide');
+                    document.getElementById('titleSuccess').innerHTML = "@resx.Update" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgUpdate";
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                       document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Update" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnUpdate" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/Users/AddUsers",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    FullName: document.getElementById('FullName').value,
+                    Username: document.getElementById('Username').value,
+                    UserTypeId: document.getElementById('ddlUserType').value,
+                    Email: document.getElementById('Email').value,
+                    Password: document.getElementById('Password').value,
+                    PhoneNumber: document.getElementById('PhoneNumber').value
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 1) {
+                        $('#modal-Users').modal('hide');
+                        document.getElementById('titleSuccess').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgSuccess').innerHTML = "@resx.MsgSave" ;
+                        $("#modal-success").modal();
+                    } else {
+                        document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                        document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                        $("#modal-danger").modal();
+                    }
+                },
+                error: function (result) {
+                    document.getElementById('titleDanger').innerHTML =  "@resx.Save" ;
+                    document.getElementById('MsgDanger').innerHTML = "@resx.MsgUnSave" ;
+                    $("#modal-danger").modal();
+                }
+            });
+        }
+        clearUsers();
+    }
+    var city;
+    function EditUsers(ID) {
+        document.getElementById('titleUsers').innerHTML = "@resx.Edit @resx.Users";
+        document.getElementById('btnSave').innerHTML = "@resx.Update";
+        document.getElementById('lblUsersId').value = ID;
+        $.ajax({
+            url: "/Users/BindUsers",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID }),
+            dataType: "json",
+            success: function (data) {
+                $(".prog").fadeOut(500);
+                if (data.code == 0) {
+                    document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                  document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                    $("#modal-danger").modal();
+                } else {
+
+                    city = data;
+                    document.getElementById('FullName').value = city[0].FullName;
+                    document.getElementById('Username').value = city[0].Username;
+                    document.getElementById('Email').value = city[0].Email;
+                    document.getElementById('ddlUserType').value = city[0].UserTypeId;
+                    document.getElementById('Password').value = city[0].Password;
+                    document.getElementById('PhoneNumber').value = city[0].PhoneNumber;
+
+                }
+            },
+            error: function () {
+                $(".prog").fadeOut(500);
+                document.getElementById('titleDanger').innerHTML = "@resx.Error" ;
+                document.getElementById('MsgDanger').innerHTML = "@resx.MsgSamethingWrong" ;
+                $("#modal-danger").modal();
+            }
+        });
+    }
+    function DeleteUsers() {
+        $(".prog").fadeIn(500);
+        $.ajax({
+            url: "/Users/DeleteUsers",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: document.getElementById('lblUsersId').value }),
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    $(".prog").fadeOut(500);
+                    document.getElementById('titleSuccess').innerHTML ="@resx.Delete" ;
+                    document.getElementById('MsgSuccess').innerHTML = "@resx.MsgDelete" ;
+                    $("#modal-success").modal();
+                } else {
+                   document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+              document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+                }
+            },
+            error: function (result) {
+                document.getElementById('titleDanger').innerHTML ="@resx.Delete" ;
+               document.getElementById('MsgDanger').innerHTML =" @resx.MsgUnDelete" ;
+                $("#modal-danger").modal();
+            }
+        });
+
+    }
+    function showUsers() {
+        console.log("it's defined")
+        document.getElementById('titleUsers').innerHTML = "@resx.Add @resx.Users";
+        document.getElementById('btnSave').innerHTML = "@resx.Save";
+    }
+    function clearUsers() {
+        //location.reload();
+        document.getElementById('FullName').value = "";
+        document.getElementById('ddlUserType').value = "";
+        document.getElementById('Email').value = "";
+        document.getElementById('Password').value = "";
+        document.getElementById('PhoneNumber').value = "";
+    }
+    function checkValidtion_btnAddUsers() {
+        var isVaild = true;
+        if (!$('#FullName')[0].checkValidity()) {
+            document.getElementById('reFullName').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reFullName').innerHTML = "*";
+        }
+        if (!$('#Username')[0].checkValidity()) {
+            document.getElementById('reUsername').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reUsername').innerHTML = "*";
+        }
+        if (!$('#Email')[0].checkValidity()) {
+            document.getElementById('reEmail').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reEmail').innerHTML = "*";
+        }
+        if (!$('#Password')[0].checkValidity()) {
+            document.getElementById('rePassword').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('rePassword').innerHTML = "*";
+        }
+        @*if (!$('#Password') != $('#ConfirmPassword')) {
+            document.getElementById('rePassword').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('rePassword').innerHTML = "*";
+        }*@
+        if (!$('#ConfirmPassword')[0].checkValidity()) {
+            document.getElementById('reConfirmPassword').innerHTML = "* @resx.MsgRequire";
+            isVaild = false;
+        } else {
+            document.getElementById('reConfirmPassword').innerHTML = "*";
+        }
+        return isVaild;
+    }
+    function OKR() {
+        GetUsersList();
+        clearUsers();
+       // top.location.href = "/Users";
+    }
+    function closeModel() {
+          clearUsers();
+    }
+    function ConfirmDelete() {
+        DeleteUsers();
+    }
+
+    function Delete(Id) {
+         document.getElementById('lblUsersId').value = Id;
+          document.getElementById('titleWarning').innerHTML ="@resx.Delete" ;
+        document.getElementById('MsgWarning').innerHTML = "@resx.MsgWarningDelete" ;
+        $("#modal-warning").modal();
+    }
+</script>

@@ -34,6 +34,8 @@
                         <tr>
                             <th>@resx.IpAddress @resx.theCamera</th>
                             <th>@resx.Longitude @resx.theCamera</th>
+                            <th>@resx.Longitude @resx.theCamera</th>
+                            <th>IsInStreetBegaining</th>
                             <th>@resx.Name @resx.theStreet</th>
                             <th>@resx.Name @resx.theCity</th>
                             <th></th>
@@ -66,6 +68,16 @@
                         <input type="text" required id="IpAddress" class="form-control">
                     </div>
                     <div class="col-md-12">
+                        <label>IsInStreetBegaining <span id="reIsInStreetBegaining" style="color:red"> * </span></label>
+                        <input type="text" required id="IsInStreetBegaining" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label> @resx.Latitude <span id="reLatitude" style="color:red"> * </span></label>
+                        <input type="text" required id="Latitude" class="form-control">
+                    </div>
+                    <div class="col-md-12">
                         <label>@resx.Longitude <span id="reLongitude" style="color:red"> * </span></label>
                         <input type="text" required id="Longitude" class="form-control">
                     </div>
@@ -78,7 +90,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
+                    <button type="button" onclick="closeModel()" class="btn btn-default pull-right" data-dismiss="modal">@resx.Close</button>
                     <button type="button" id="btnSave" onclick="SaveCameras()" class="btn btn-primary pull-left">@resx.Save</button>
                 </div>
             </div>
@@ -128,7 +140,9 @@
                     for (var i = 0; i < CurrentCamerasList.length; i++) {
                         row += "<tr>" +
                             "<td>" + CurrentCamerasList[i].IpAddress + "</td>" +
+                            "<td>" + CurrentCamerasList[i].Latitude + "</td>" +
                             "<td>" + CurrentCamerasList[i].Longitude + "</td>" +
+                            "<td>" + CurrentCamerasList[i].IsInStreetBegaining + "</td>" +
                             "<td>" + CurrentCamerasList[i].StreetName + "</td>" +
                             "<td>" + CurrentCamerasList[i].CityName + "</td>" +
                             "<td style='width:150px;'>" +
@@ -158,7 +172,9 @@
                 data: JSON.stringify({
                     Id: document.getElementById('lblCamerasId').value,
                     IpAddress: document.getElementById('IpAddress').value,
+                    Latitude: document.getElementById('Latitude').value,
                     Longitude: document.getElementById('Longitude').value,
+                    IsInStreetBegaining: document.getElementById('IsInStreetBegaining').value,
                     StreetID: document.getElementById('ddlStreetID').value ,
                     IsDeleted : "N"
                 }),
@@ -189,7 +205,9 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({
                     IpAddress: document.getElementById('IpAddress').value ,
+                    Latitude: document.getElementById('Latitude').value ,
                     Longitude: document.getElementById('Longitude').value ,
+                    IsInStreetBegaining: document.getElementById('IsInStreetBegaining').value ,
                      StreetID: document.getElementById('ddlStreetID').value
                 }),
                 dataType: "json",
@@ -234,9 +252,11 @@
                 } else {
 
                     camera = data;
-                   
+
                     document.getElementById('IpAddress').value = camera[0].IpAddress;
+                    document.getElementById('Latitude').value = camera[0].Latitude;
                     document.getElementById('Longitude').value = camera[0].Longitude;
+                    document.getElementById('IsInStreetBegaining').value = camera[0].IsInStreetBegaining;
                     document.getElementById('ddlStreetID').value = camera[0].StreetID;
 
                 }
@@ -285,7 +305,9 @@
     function clearCameras() {
         //location.reload();
        document.getElementById('IpAddress').value = "";
+        document.getElementById('Latitude').value = "";
        document.getElementById('Longitude').value = "";
+        document.getElementById('IsInStreetBegaining').value = "";
        document.getElementById('ddlStreetID').value = "";
     }
     function checkValidtion_btnAddCameras() {
