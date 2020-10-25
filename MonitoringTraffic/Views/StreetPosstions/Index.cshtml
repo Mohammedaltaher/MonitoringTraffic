@@ -1,4 +1,4 @@
-﻿@using resx = MonitoringTraffic.Resources.AR
+﻿@using resx = MonitoringTraffic.Resources.EN
 @{
     ViewBag.Title = resx.StreetPosstions;
     ViewBag.Title = "Monitoring Traffic";// Session["StreetPosstionsName"];
@@ -7,57 +7,48 @@
 <section class="content-header">
     <h1>
         @resx.Manage @resx.StreetPosstions
-        <small>@resx.StreetPosstions</small>
+        @*<small>@resx.StreetPosstions</small>*@
     </h1>
-    <ol class="breadcrumb">
+    @*<ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.StreetPosstions</a></li>
         <li class="active">@resx.StreetPosstions</li>
-    </ol>
+    </ol>*@
 
 </section>
 <!-- Main content -->
 <!-- Table  -->
-<section class="content">
-    <div class="row">
-        <div class="box center-block">
-            <div class="box-header">
-                <h3 class="box-title">
-                    <button type="button" onclick="showStreetPosstions()" data-toggle="modal" data-target="#modal-StreetPosstions" class="btn btn-primary">@resx.Add  @resx.StreetPosstions</button>
-                </h3>
-            </div>
-            <div class="col-md-1">
-            </div>
-            <div class="box-body col-md-10">
-                <table id="tblStreetPosstions" class="table table-bordered table-hover table-striped dataTabler">
-                    <thead style="background-color: #3c8dbc">
+<div class="card-body">
+    <h3 class="box-title">
+        <button type="button" onclick="showStreetPosstions()" data-toggle="modal" data-target="#modal-StreetPosstions" class="btn btn-primary">@resx.Add  @resx.StreetPosstions</button>
+    </h3>
 
-                        <tr>
-                            <th>@resx.Latitude @resx.StreetPosstions</th>
-                            <th>@resx.Longitude @resx.StreetPosstions</th>
-                            <th>@resx.Name @resx.StreetPosstions</th>
-                            <th>@resx.Name @resx.theStreet</th>
-                            <th></th>
+   
+        <table id="tblStreetPosstions" class="table table-bordered table-hover table-striped dataTabler">
+            <thead style="background-color: #3c8dbc">
+                <tr>
+                    <th>@resx.Latitude </th>
+                    <th>@resx.Longitude </th>
+                    <th>@resx.Name @resx.StreetPosstions</th>
+                    <th>@resx.Street @resx.Name </th>
+                    <th></th>
 
-                        </tr>
-                    </thead>
-                    <tbody id="bodyStreetPosstions"></tbody>
-                </table>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
-</section>
+                </tr>
+            </thead>
+            <tbody id="bodyStreetPosstions"></tbody>
+        </table>
+
+</div>
 <!-- End Table  -->
 <!-- Model  -->
 <div class="modal fade" id="modal-StreetPosstions">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <label hidden id="lblStreetPosstionsId"></label>
         <div class="modal-content">
             <div class="modal-header bg-aqua">
+                <h4 id="titleStreetPosstions" class="modal-title">@resx.Add @resx.StreetPosstions</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 id="titleStreetPosstions" class="modal-title">@resx.Add @resx.StreetPosstions</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -138,7 +129,7 @@
                             "<td>" + CurrentStreetPosstionsList[i].StreetName + "</td>" +
                             "<td>" + CurrentStreetPosstionsList[i].Name + "</td>" +
                             "<td style='width:150px;'>" +
-                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-StreetPosstions'  onclick='EditStreetPosstions(" + CurrentStreetPosstionsList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-StreetPosstions'  onclick='EditStreetPosstions(" + CurrentStreetPosstionsList[i].Id + ")'>@resx.Edit</button>" + " " +
                             "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentStreetPosstionsList[i].Id +
                             ")'>@resx.Delete</button>" +
                             "</td>" +

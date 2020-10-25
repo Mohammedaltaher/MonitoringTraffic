@@ -120,97 +120,262 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Add1" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="Cameras" xml:space="preserve">
+    <value>Cameras</value>
+  </data>
+  <data name="Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="Cities" xml:space="preserve">
+    <value>Cities</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="Close1" xml:space="preserve">
+    <value>اغلق</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="Confirm1" xml:space="preserve">
+    <value>تاكيد</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="Delete1" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="Diractions" xml:space="preserve">
+    <value>Diraction</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Edit1" xml:space="preserve">
+    <value>نعديل</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Email1" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="EndLatitude" xml:space="preserve">
+    <value>End Latitude</value>
+  </data>
+  <data name="EndLongitude" xml:space="preserve">
+    <value>End Longitude</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Error1" xml:space="preserve">
+    <value>حطأ</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="IpAddress" xml:space="preserve">
+    <value>IP</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
+  </data>
+  <data name="Manage1" xml:space="preserve">
+    <value>ادارة</value>
   </data>
   <data name="MsgDelete" xml:space="preserve">
     <value>Data has been Deleted succssufly</value>
   </data>
+  <data name="MsgDelete1" xml:space="preserve">
+    <value>تم مسح البينات بنجاح</value>
+  </data>
   <data name="MsgNotMatch" xml:space="preserve">
     <value>Password Not match</value>
+  </data>
+  <data name="MsgNotMatch1" xml:space="preserve">
+    <value>كلمة المرور غير متطابقة </value>
   </data>
   <data name="MsgRequire" xml:space="preserve">
     <value>Require Information</value>
   </data>
+  <data name="MsgRequire1" xml:space="preserve">
+    <value>مطلوب</value>
+  </data>
   <data name="MsgSamethingWrong" xml:space="preserve">
     <value>SameThing want Wrong </value>
+  </data>
+  <data name="MsgSamethingWrong1" xml:space="preserve">
+    <value>حدث خطأ ما </value>
   </data>
   <data name="MsgSave" xml:space="preserve">
     <value>Data has been Saved Succssufly</value>
   </data>
+  <data name="MsgSave1" xml:space="preserve">
+    <value>تم حفظ البيانات بنجاح</value>
+  </data>
   <data name="MsgUnDelete" xml:space="preserve">
     <value>Data has not been Deleted succssufly</value>
+  </data>
+  <data name="MsgUnDelete1" xml:space="preserve">
+    <value>لم يتم مسح البيانات</value>
   </data>
   <data name="MsgUnSave" xml:space="preserve">
     <value>Data Has not been Saved </value>
   </data>
+  <data name="MsgUnSave1" xml:space="preserve">
+    <value>لم يتم حفظ البيانات</value>
+  </data>
   <data name="MsgUnUpdate" xml:space="preserve">
     <value>Data has not  been updated succssufly</value>
+  </data>
+  <data name="MsgUnUpdate1" xml:space="preserve">
+    <value>لم تم تحديث البيانات بنجاح </value>
   </data>
   <data name="MsgUpdate" xml:space="preserve">
     <value>Data has been updated succssufly</value>
   </data>
+  <data name="MsgUpdate1" xml:space="preserve">
+    <value>تم تحديث البيانات بنجاح</value>
+  </data>
   <data name="MsgWarningDelete" xml:space="preserve">
     <value>Are you sure you wont to delete this  ?</value>
+  </data>
+  <data name="MsgWarningDelete1" xml:space="preserve">
+    <value>هل انت متاكد من مسح البيانات؟</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Name1" xml:space="preserve">
+    <value>اسم</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="No1" xml:space="preserve">
+    <value>لا</value>
   </data>
   <data name="Number" xml:space="preserve">
     <value>Number</value>
   </data>
+  <data name="Number1" xml:space="preserve">
+    <value>الرقم</value>
+  </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="Ok1" xml:space="preserve">
+    <value>تم</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Password1" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
+  </data>
+  <data name="Phone1" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin</value>
   </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
   </data>
+  <data name="Role1" xml:space="preserve">
+    <value>الصلاحية</value>
+  </data>
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
+  </data>
+  <data name="Roles1" xml:space="preserve">
+    <value>الصلاحيات</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Save1" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="StartLatitude" xml:space="preserve">
+    <value>Start Latitude</value>
+  </data>
+  <data name="StartLongitude" xml:space="preserve">
+    <value>Start Longitude</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="StreetPosstions" xml:space="preserve">
+    <value>Street Posstions</value>
+  </data>
+  <data name="Streets" xml:space="preserve">
+    <value>Streets</value>
+  </data>
+  <data name="theCamera" xml:space="preserve">
+    <value>the Camera</value>
+  </data>
+  <data name="theCity" xml:space="preserve">
+    <value>the City</value>
+  </data>
+  <data name="theName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="theStreet" xml:space="preserve">
+    <value>the Street</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="Update1" xml:space="preserve">
+    <value>تحديث</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="User1" xml:space="preserve">
+    <value>مستخدم</value>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="Users1" xml:space="preserve">
+    <value>المستحدمين</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="Warning1" xml:space="preserve">
+    <value>تحذير</value>
+  </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="Yes1" xml:space="preserve">
+    <value>نعم</value>
   </data>
 </root>

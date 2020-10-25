@@ -1,4 +1,4 @@
-﻿@using resx = MonitoringTraffic.Resources.AR
+﻿@using resx = MonitoringTraffic.Resources.EN
 @{
     ViewBag.Title = resx.Cameras;
     ViewBag.Title = "Monitoring Traffic";// Session["CamerasName"];
@@ -7,65 +7,56 @@
 <section class="content-header">
     <h1>
         @resx.Manage @resx.Cameras
-        <small>@resx.Cameras</small>
+        @*<small>@resx.Cameras</small>*@
     </h1>
-    <ol class="breadcrumb">
+    @*<ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.Cameras</a></li>
         <li class="active">@resx.Cameras</li>
-    </ol>
+    </ol>*@
 
 </section>
 <!-- Main content -->
 <!-- Table  -->
-<section class="content">
-    <div class="row">
-        <div class="box center-block">
-            <div class="box-header">
-                <h3 class="box-title">
-                    <button type="button" onclick="showCameras()" data-toggle="modal" data-target="#modal-Cameras" class="btn btn-primary">@resx.Add  @resx.Camera</button>
-                </h3>
-            </div>
-            <div class="col-md-1">
-            </div>
-            <div class="box-body col-md-10">
-                <table id="tblCameras" class="table table-bordered table-hover table-striped dataTabler">
-                    <thead style="background-color: #3c8dbc">
+<div class="card-body">
+    <h3 class="box-title">
+        <button type="button" onclick="showCameras()" data-toggle="modal" data-target="#modal-Cameras" class="btn btn-primary">@resx.Add  @resx.Camera</button>
+    </h3>
 
-                        <tr>
-                            <th>@resx.IpAddress @resx.theCamera</th>
-                            <th>@resx.Longitude @resx.theCamera</th>
-                            <th>@resx.Longitude @resx.theCamera</th>
-                            <th>IsInStreetBegaining</th>
-                            <th>@resx.Name @resx.theStreet</th>
-                            <th>@resx.Name @resx.theCity</th>
-                            <th></th>
+    <table id="tblCameras" class="table table-bordered table-hover table-striped dataTabler">
+        <thead style="background-color: #3c8dbc">
 
-                        </tr>
-                    </thead>
-                    <tbody id="bodyCameras"></tbody>
-                </table>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
-</section>
+            <tr>
+                @*<th>@resx.IpAddress @resx.theCamera</th>*@
+                <th>@resx.Latitude</th>
+                <th>@resx.Longitude </th>
+                <th>IsInStreetBegaining</th>
+                <th>@resx.Street @resx.Name </th>
+                <th>@resx.City @resx.Name </th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody id="bodyCameras"></tbody>
+    </table>
+
+</div>
 <!-- End Table  -->
 <!-- Model  -->
 <div class="modal fade" id="modal-Cameras">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <label hidden id="lblCamerasId"></label>
         <div class="modal-content">
             <div class="modal-header bg-aqua">
+                <h4 id="titleCameras" class="modal-title">@resx.Add @resx.Cameras</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 id="titleCameras" class="modal-title">@resx.Add @resx.Cameras</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <label>@resx.IpAddress <span id="reIpAddress" style="color:red"> * </span></label>
-                        <input type="text" required id="IpAddress" class="form-control">
+                        <label hidden>@resx.IpAddress <span id="reIpAddress" style="color:red"> * </span></label>
+                        <input type="text" hidden required id="IpAddress" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <label>IsInStreetBegaining <span id="reIsInStreetBegaining" style="color:red"> * </span></label>
@@ -111,12 +102,13 @@
     );
     function setTableProp(tbl) {
         $(tbl).DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': false,
-            'info': true,
-            'autoWidth': false
+            "paging": false,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+            "responsive": true,
         });
     }
     var CurrentCamerasList = null;
@@ -139,14 +131,14 @@
                     var row = "";
                     for (var i = 0; i < CurrentCamerasList.length; i++) {
                         row += "<tr>" +
-                            "<td>" + CurrentCamerasList[i].IpAddress + "</td>" +
+                            //"<td>" + CurrentCamerasList[i].IpAddress + "</td>" +
                             "<td>" + CurrentCamerasList[i].Latitude + "</td>" +
                             "<td>" + CurrentCamerasList[i].Longitude + "</td>" +
                             "<td>" + CurrentCamerasList[i].IsInStreetBegaining + "</td>" +
                             "<td>" + CurrentCamerasList[i].StreetName + "</td>" +
                             "<td>" + CurrentCamerasList[i].CityName + "</td>" +
                             "<td style='width:150px;'>" +
-                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Cameras'  onclick='EditCameras(" + CurrentCamerasList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Cameras'  onclick='EditCameras(" + CurrentCamerasList[i].Id + ")'>@resx.Edit</button>" + " " +
                             "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentCamerasList[i].Id +
                             ")'>@resx.Delete</button>" +
                             "</td>" +
@@ -312,12 +304,7 @@
     }
     function checkValidtion_btnAddCameras() {
         var isVaild = true;
-        if (!$('#IpAddress')[0].checkValidity()) {
-            document.getElementById('reIpAddress').innerHTML = "* @resx.MsgRequire";
-            isVaild = false;
-        } else {
-            document.getElementById('reIpAddress').innerHTML = "*";
-        }
+      
          if (!$('#Longitude')[0].checkValidity()) {
             document.getElementById('reLongitude').innerHTML = "* @resx.MsgRequire";
             isVaild = false;

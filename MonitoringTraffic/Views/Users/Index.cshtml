@@ -1,4 +1,4 @@
-﻿@using resx = MonitoringTraffic.Resources.AR
+﻿@using resx = MonitoringTraffic.Resources.EN
 @{
     ViewBag.Title = resx.Users;
     ViewBag.Title = "Monitoring Traffic";// Session["UsersName"];
@@ -7,59 +7,50 @@
 <section class="content-header">
     <h1>
         @resx.Manage @resx.Users
-        <small>@resx.Users</small>
+        @*<small>@resx.Users</small>*@
     </h1>
-    <ol class="breadcrumb">
+    @*<ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> @resx.Manage @resx.Users</a></li>
         <li class="active">@resx.Users</li>
-    </ol>
+    </ol>*@
 
 </section>
 <!-- Main content -->
 <!-- Table  -->
-<section class="content">
-    <div class="row">
-        <div class="box center-block">
-            <div class="box-header">
-                <h3 class="box-title">
-                    <button type="button" onclick="showUsers()" data-toggle="modal" data-target="#modal-Users" class="btn btn-primary">@resx.Add  @resx.User</button>
-                </h3>
-            </div>
-            <div class="col-md-1">
-            </div>
-            <div class="box-body col-md-10">
-                <table id="tblUsers" class="table table-bordered table-hover table-striped dataTabler">
-                    <thead style="background-color: #3c8dbc">
+<div class="card-body">
+    <h3 class="box-title">
+        <button type="button" onclick="showUsers()" data-toggle="modal" data-target="#modal-Users" class="btn btn-primary">@resx.Add  @resx.User</button>
+    </h3>
 
-                        <tr>
-                            <th>@resx.Name @resx.User</th>
-                            <th>@resx.Email</th>
-                            <th>userName  </th>
-                            <th>@resx.Password  </th>
-                            <th>@resx.Phone  </th>
-                            <th>user type </th>
-                            <th></th>
+    <table id="tblUsers" class="table table-bordered table-hover table-striped dataTabler">
+        <thead style="background-color: #3c8dbc">
 
-                        </tr>
-                    </thead>
-                    <tbody id="bodyUsers"></tbody>
-                </table>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
-</section>
+            <tr>
+                <th>@resx.Name</th>
+                <th>UserName</th>
+                <th>User Type </th>
+                <th>@resx.Email  </th>
+                <th>@resx.Password </th>
+                <th>@resx.Phone  </th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody id="bodyUsers"></tbody>
+    </table>
+</div>
+
 <!-- End Table  -->
 <!-- Model  -->
 <div class="modal fade" id="modal-Users">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-lg">
         <label hidden id="lblUsersId"></label>
         <div class="modal-content">
             <div class="modal-header bg-aqua">
+                <h4 id="titleUsers" class="modal-title">@resx.Add @resx.Users</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 id="titleUsers" class="modal-title">@resx.Add @resx.Users</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -155,7 +146,7 @@
                             "<td>" + CurrentUsersList[i].Password + "</td>" +
                             "<td>" + CurrentUsersList[i].PhoneNumber + "</td>" +
                             "<td style='width:150px;'>" +
-                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Users'  onclick='EditUsers(" + CurrentUsersList[i].Id + ")'>@resx.Edit</button>" +
+                            "<button class='btn btn-primary pull-right' data-toggle='modal' data-target='#modal-Users'  onclick='EditUsers(" + CurrentUsersList[i].Id + ")'>@resx.Edit</button>" + " " +
                             "<button class='btn btn-danger pull-left'  onclick='Delete(" + CurrentUsersList[i].Id +
                             ")'>@resx.Delete</button>" +
                             "</td>" +

@@ -70,11 +70,74 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اضافة.
+        /// </summary>
+        public static string Add1 {
+            get {
+                return ResourceManager.GetString("Add1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera.
+        /// </summary>
+        public static string Camera {
+            get {
+                return ResourceManager.GetString("Camera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cameras.
+        /// </summary>
+        public static string Cameras {
+            get {
+                return ResourceManager.GetString("Cameras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        public static string Capacity {
+            get {
+                return ResourceManager.GetString("Capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cities.
+        /// </summary>
+        public static string Cities {
+            get {
+                return ResourceManager.GetString("Cities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اغلق.
+        /// </summary>
+        public static string Close1 {
+            get {
+                return ResourceManager.GetString("Close1", resourceCulture);
             }
         }
         
@@ -88,11 +151,38 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تاكيد.
+        /// </summary>
+        public static string Confirm1 {
+            get {
+                return ResourceManager.GetString("Confirm1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مسح.
+        /// </summary>
+        public static string Delete1 {
+            get {
+                return ResourceManager.GetString("Delete1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diraction.
+        /// </summary>
+        public static string Diractions {
+            get {
+                return ResourceManager.GetString("Diractions", resourceCulture);
             }
         }
         
@@ -106,11 +196,47 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نعديل.
+        /// </summary>
+        public static string Edit1 {
+            get {
+                return ResourceManager.GetString("Edit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to البريد الالكتروني.
+        /// </summary>
+        public static string Email1 {
+            get {
+                return ResourceManager.GetString("Email1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Latitude.
+        /// </summary>
+        public static string EndLatitude {
+            get {
+                return ResourceManager.GetString("EndLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Longitude.
+        /// </summary>
+        public static string EndLongitude {
+            get {
+                return ResourceManager.GetString("EndLongitude", resourceCulture);
             }
         }
         
@@ -124,11 +250,65 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حطأ.
+        /// </summary>
+        public static string Error1 {
+            get {
+                return ResourceManager.GetString("Error1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP.
+        /// </summary>
+        public static string IpAddress {
+            get {
+                return ResourceManager.GetString("IpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latitude.
+        /// </summary>
+        public static string Latitude {
+            get {
+                return ResourceManager.GetString("Latitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longitude.
+        /// </summary>
+        public static string Longitude {
+            get {
+                return ResourceManager.GetString("Longitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage.
         /// </summary>
         public static string Manage {
             get {
                 return ResourceManager.GetString("Manage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ادارة.
+        /// </summary>
+        public static string Manage1 {
+            get {
+                return ResourceManager.GetString("Manage1", resourceCulture);
             }
         }
         
@@ -142,11 +322,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم مسح البينات بنجاح.
+        /// </summary>
+        public static string MsgDelete1 {
+            get {
+                return ResourceManager.GetString("MsgDelete1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password Not match.
         /// </summary>
         public static string MsgNotMatch {
             get {
                 return ResourceManager.GetString("MsgNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كلمة المرور غير متطابقة .
+        /// </summary>
+        public static string MsgNotMatch1 {
+            get {
+                return ResourceManager.GetString("MsgNotMatch1", resourceCulture);
             }
         }
         
@@ -160,11 +358,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مطلوب.
+        /// </summary>
+        public static string MsgRequire1 {
+            get {
+                return ResourceManager.GetString("MsgRequire1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SameThing want Wrong .
         /// </summary>
         public static string MsgSamethingWrong {
             get {
                 return ResourceManager.GetString("MsgSamethingWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حدث خطأ ما .
+        /// </summary>
+        public static string MsgSamethingWrong1 {
+            get {
+                return ResourceManager.GetString("MsgSamethingWrong1", resourceCulture);
             }
         }
         
@@ -178,11 +394,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم حفظ البيانات بنجاح.
+        /// </summary>
+        public static string MsgSave1 {
+            get {
+                return ResourceManager.GetString("MsgSave1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data has not been Deleted succssufly.
         /// </summary>
         public static string MsgUnDelete {
             get {
                 return ResourceManager.GetString("MsgUnDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لم يتم مسح البيانات.
+        /// </summary>
+        public static string MsgUnDelete1 {
+            get {
+                return ResourceManager.GetString("MsgUnDelete1", resourceCulture);
             }
         }
         
@@ -196,11 +430,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لم يتم حفظ البيانات.
+        /// </summary>
+        public static string MsgUnSave1 {
+            get {
+                return ResourceManager.GetString("MsgUnSave1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data has not  been updated succssufly.
         /// </summary>
         public static string MsgUnUpdate {
             get {
                 return ResourceManager.GetString("MsgUnUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لم تم تحديث البيانات بنجاح .
+        /// </summary>
+        public static string MsgUnUpdate1 {
+            get {
+                return ResourceManager.GetString("MsgUnUpdate1", resourceCulture);
             }
         }
         
@@ -214,11 +466,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تم تحديث البيانات بنجاح.
+        /// </summary>
+        public static string MsgUpdate1 {
+            get {
+                return ResourceManager.GetString("MsgUpdate1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you wont to delete this  ?.
         /// </summary>
         public static string MsgWarningDelete {
             get {
                 return ResourceManager.GetString("MsgWarningDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to هل انت متاكد من مسح البيانات؟.
+        /// </summary>
+        public static string MsgWarningDelete1 {
+            get {
+                return ResourceManager.GetString("MsgWarningDelete1", resourceCulture);
             }
         }
         
@@ -232,11 +502,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم.
+        /// </summary>
+        public static string Name1 {
+            get {
+                return ResourceManager.GetString("Name1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لا.
+        /// </summary>
+        public static string No1 {
+            get {
+                return ResourceManager.GetString("No1", resourceCulture);
             }
         }
         
@@ -250,11 +538,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الرقم.
+        /// </summary>
+        public static string Number1 {
+            get {
+                return ResourceManager.GetString("Number1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تم.
+        /// </summary>
+        public static string Ok1 {
+            get {
+                return ResourceManager.GetString("Ok1", resourceCulture);
             }
         }
         
@@ -268,11 +574,38 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to كلمة المرور.
+        /// </summary>
+        public static string Password1 {
+            get {
+                return ResourceManager.GetString("Password1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone.
         /// </summary>
         public static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الهاتف.
+        /// </summary>
+        public static string Phone1 {
+            get {
+                return ResourceManager.GetString("Phone1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pin.
+        /// </summary>
+        public static string Pin {
+            get {
+                return ResourceManager.GetString("Pin", resourceCulture);
             }
         }
         
@@ -286,11 +619,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الصلاحية.
+        /// </summary>
+        public static string Role1 {
+            get {
+                return ResourceManager.GetString("Role1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roles.
         /// </summary>
         public static string Roles {
             get {
                 return ResourceManager.GetString("Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الصلاحيات.
+        /// </summary>
+        public static string Roles1 {
+            get {
+                return ResourceManager.GetString("Roles1", resourceCulture);
             }
         }
         
@@ -304,11 +655,119 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حفظ.
+        /// </summary>
+        public static string Save1 {
+            get {
+                return ResourceManager.GetString("Save1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Latitude.
+        /// </summary>
+        public static string StartLatitude {
+            get {
+                return ResourceManager.GetString("StartLatitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Longitude.
+        /// </summary>
+        public static string StartLongitude {
+            get {
+                return ResourceManager.GetString("StartLongitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street.
+        /// </summary>
+        public static string Street {
+            get {
+                return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street Posstions.
+        /// </summary>
+        public static string StreetPosstions {
+            get {
+                return ResourceManager.GetString("StreetPosstions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Streets.
+        /// </summary>
+        public static string Streets {
+            get {
+                return ResourceManager.GetString("Streets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the Camera.
+        /// </summary>
+        public static string theCamera {
+            get {
+                return ResourceManager.GetString("theCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the City.
+        /// </summary>
+        public static string theCity {
+            get {
+                return ResourceManager.GetString("theCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string theName {
+            get {
+                return ResourceManager.GetString("theName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the Street.
+        /// </summary>
+        public static string theStreet {
+            get {
+                return ResourceManager.GetString("theStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تحديث.
+        /// </summary>
+        public static string Update1 {
+            get {
+                return ResourceManager.GetString("Update1", resourceCulture);
             }
         }
         
@@ -322,11 +781,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مستخدم.
+        /// </summary>
+        public static string User1 {
+            get {
+                return ResourceManager.GetString("User1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المستحدمين.
+        /// </summary>
+        public static string Users1 {
+            get {
+                return ResourceManager.GetString("Users1", resourceCulture);
             }
         }
         
@@ -340,11 +817,29 @@ namespace MonitoringTraffic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تحذير.
+        /// </summary>
+        public static string Warning1 {
+            get {
+                return ResourceManager.GetString("Warning1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نعم.
+        /// </summary>
+        public static string Yes1 {
+            get {
+                return ResourceManager.GetString("Yes1", resourceCulture);
             }
         }
     }
